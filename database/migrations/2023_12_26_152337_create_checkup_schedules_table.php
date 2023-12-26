@@ -8,13 +8,15 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('checkup_schedules', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('doctor_id');
-            $table->enum('day',['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu']);
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('doctor_id')->index('doctor_id');
+            $table->enum('day', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
@@ -23,8 +25,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('checkup_schedules');
     }

@@ -8,21 +8,25 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('checkup_details', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('checkup_id');
-            $table->unsignedBigInteger('medicine_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('checkup_id')->index('checkup_id');
+            $table->unsignedBigInteger('medicine_id')->index('medicine_id');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('checkup_details');
     }

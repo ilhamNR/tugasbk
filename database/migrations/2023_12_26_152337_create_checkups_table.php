@@ -8,12 +8,14 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('checkups', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('checkup_register_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('checkup_register_id')->index('checkup_register_id');
             $table->dateTime('checkup_date');
             $table->text('details');
             $table->integer('cost');
@@ -23,8 +25,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('checkups');
     }
