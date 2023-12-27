@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Doktor\PeriksaController;
+use App\Http\Controllers\Doktor\RiwayatPasienController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,15 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::group(['middleware' => 'role:admin'], function () {
+        // Routes accessible only by users with the 'admin' role
+    });
+
+
 });
+
+Route::get('/periksa', [PeriksaController::class, 'index'])->name('doktor.periksa');
+Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('doktor.riwayat-pasien');
+
+Route::get('/obat', [RiwayatPasienController::class, 'index'])->name('doktor.obat');
