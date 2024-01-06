@@ -3,6 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property integer $id
@@ -16,8 +21,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property UserDoctorPivot[] $userDoctorPivots
  * @property CheckupSchedule[] $checkupSchedules
  */
-class User extends Model
+
+class User extends Authenticatable
 {
+    use HasApiTokens, HasFactory, Notifiable;
     /**
      * @var array
      */

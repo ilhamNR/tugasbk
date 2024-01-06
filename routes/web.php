@@ -24,10 +24,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    //default jetstream dashboard
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 
+    Route::get('/dashboard', [PeriksaController::class, 'index'])->name('doktor.periksa');
     Route::group(['middleware' => 'role:admin'], function () {
         // Routes accessible only by users with the 'admin' role
     });
