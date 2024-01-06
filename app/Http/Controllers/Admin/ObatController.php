@@ -7,11 +7,16 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\Medicine;
 use GrahamCampbell\ResultType\Success;
-
+use Yajra\DataTables\DataTables;
 class ObatController extends Controller
 {
-    public function index()
+    public function index($request)
     {
+        $data = Medicine::get();
+        if ($request->ajax()) {
+            return DataTables::of($data)->toJson();
+        }
+
         return view('admin.obat');
     }
 

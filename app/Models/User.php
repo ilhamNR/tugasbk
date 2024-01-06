@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\CheckupSchedule');
     }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
 }

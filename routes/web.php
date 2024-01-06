@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Doktor\PeriksaController;
 use App\Http\Controllers\Doktor\RiwayatPasienController;
+use App\Http\Controllers\Admin\ObatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +30,17 @@ Route::middleware([
     //     return view('dashboard');
     // })->name('dashboard');
 
-    Route::get('/dashboard', [PeriksaController::class, 'index'])->name('doktor.periksa');
+    Route::group(['middleware' => 'role:admin'], function () {
+        Route::get('/dashboard', [PeriksaController::class, 'index'])->name('doktor.periksa');
+        Route::group(['prefix' => '/obat'],function(){
+            Route::get('/', [ObatController::class, 'index'])->name('doktor.obat');
+        });
+    });
+
     Route::group(['middleware' => 'role:admin'], function () {
         // Routes accessible only by users with the 'admin' role
     });
-
-
 });
 
 Route::get('/periksa', [PeriksaController::class, 'index'])->name('doktor.periksa');
 Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('doktor.riwayat-pasien');
-
-Route::get('/obat', [RiwayatPasienController::class, 'index'])->name('doktor.obat');
