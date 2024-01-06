@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('checkup_schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('doctor_id')->index('doctor_id');
+            $table->unsignedBigInteger('user_id')->index('doctor_id');
             $table->enum('day', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
             $table->time('start_time');
             $table->time('end_time');

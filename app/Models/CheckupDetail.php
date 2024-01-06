@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $medicine_id
  * @property string $created_at
  * @property string $updated_at
- * @property Medicine $medicine
  * @property Checkup $checkup
+ * @property Medicine $medicine
  */
 class CheckupDetail extends Model
 {
@@ -23,16 +23,16 @@ class CheckupDetail extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function medicine()
+    public function checkup()
     {
-        return $this->belongsTo('App\Models\Medicine');
+        return $this->belongsTo('App\Models\Checkup');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function checkup()
+    public function medicine()
     {
-        return $this->belongsTo('App\Models\Checkup');
+        return $this->belongsTo('App\Models\Medicine');
     }
 }

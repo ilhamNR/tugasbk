@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $remember_token
  * @property string $created_at
  * @property string $updated_at
- * @property CheckupSchedule[] $checkupSchedules
  * @property Poli $poli
  */
 class Doctor extends Model
@@ -25,14 +24,6 @@ class Doctor extends Model
      * @var array
      */
     protected $fillable = ['poli_id', 'name', 'address', 'no_hp', 'email', 'email_verified_at', 'password', 'remember_token', 'created_at', 'updated_at'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function checkupSchedules()
-    {
-        return $this->hasMany('App\Models\CheckupSchedule');
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

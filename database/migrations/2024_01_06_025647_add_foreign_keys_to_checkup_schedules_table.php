@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('checkup_schedules', function (Blueprint $table) {
-            $table->foreign(['doctor_id'], 'checkup_schedules_ibfk_1')->references(['id'])->on('doctors');
+            $table->foreign(['user_id'], 'checkup_schedules_ibfk_1')->references(['id'])->on('users');
         });
     }
 

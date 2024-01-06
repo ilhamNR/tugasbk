@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $queue_number
  * @property string $created_at
  * @property string $updated_at
- * @property Checkup[] $checkups
- * @property Patient $patient
  * @property CheckupSchedule $checkupSchedule
+ * @property Patient $patient
+ * @property Checkup[] $checkups
  */
 class PoliRegistrant extends Model
 {
@@ -24,11 +24,11 @@ class PoliRegistrant extends Model
     protected $fillable = ['patient_id', 'checkup_schedule_id', 'complaints', 'queue_number', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function checkups()
+    public function checkupSchedule()
     {
-        return $this->hasMany('App\Models\Checkup', 'checkup_register_id');
+        return $this->belongsTo('App\Models\CheckupSchedule');
     }
 
     /**
@@ -40,10 +40,10 @@ class PoliRegistrant extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function checkupSchedule()
+    public function checkups()
     {
-        return $this->belongsTo('App\Models\CheckupSchedule');
+        return $this->hasMany('App\Models\Checkup', 'checkup_register_id');
     }
 }

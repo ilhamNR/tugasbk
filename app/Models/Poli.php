@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property Doctor[] $doctors
+ * @property UserDoctorPivot[] $userDoctorPivots
  */
 class Poli extends Model
 {
@@ -25,5 +26,13 @@ class Poli extends Model
     public function doctors()
     {
         return $this->hasMany('App\Models\Doctor');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userDoctorPivots()
+    {
+        return $this->hasMany('App\Models\UserDoctorPivot');
     }
 }
