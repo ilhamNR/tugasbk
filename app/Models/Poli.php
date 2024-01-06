@@ -2,24 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property integer $id
+ * @property string $poli_name
+ * @property string $details
+ * @property string $created_at
+ * @property string $updated_at
+ * @property Doctor[] $doctors
+ */
 class Poli extends Model
 {
-    use HasFactory;
+    /**
+     * @var array
+     */
+    protected $fillable = ['poli_name', 'details', 'created_at', 'updated_at'];
 
-    protected $fillable = [
-        'nama_poli',
-        'keterangan',
-    ];
-
-    public function dokter()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function doctors()
     {
-        return $this->belongsTo(Dokter::class);
-    }
-    public function jadwals()
-    {
-        return $this->hasMany(Jadwal::class, 'id_poli');
+        return $this->hasMany('App\Models\Doctor');
     }
 }
