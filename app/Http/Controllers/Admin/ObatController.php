@@ -10,7 +10,7 @@ use GrahamCampbell\ResultType\Success;
 use Yajra\DataTables\DataTables;
 class ObatController extends Controller
 {
-    public function index($request)
+    public function index(Request $request)
     {
         $data = Medicine::get();
         if ($request->ajax()) {
@@ -30,9 +30,14 @@ class ObatController extends Controller
         return back()->with('success', 'Data telah ditambahkan');
     }
 
+    public function edit($id){
+        $data = Medicine::where('id', $id)->first();
+        return json_encode($data);
+    }
+
     public function update(Request $request, $id)
     {
-        $data = Medicine::where('id', $id)->first;
+        $data = Medicine::where('id', $id)->first();
         $data->update([
             'name' => $request->name,
             'unit' => $request->unit,
@@ -40,10 +45,16 @@ class ObatController extends Controller
         ]);
         return back()->with('success', 'Data telah diupdate');
     }
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $data = Medicine::where('id', $id)->first;
-        $data->destroy();
-        return back()->with('success', 'Data telah dihapus');
+        $data = Medicine::find($id);
+
+        if (!$data) {
+            return response()->json(['error' => 'Data not found'], 404);
+        }
+
+        $data->delete();
+
+        return response()->json(['success' => 'Data has been deleted']);
     }
 }

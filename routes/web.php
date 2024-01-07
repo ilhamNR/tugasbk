@@ -34,10 +34,14 @@ Route::middleware([
         Route::get('/dashboard', [PeriksaController::class, 'index'])->name('doktor.periksa');
         Route::group(['prefix' => '/obat'],function(){
             Route::get('/', [ObatController::class, 'index'])->name('doktor.obat');
+            Route::post('/create',[ObatController::class, 'create'])->name('doktor.obat.create');
+            Route::get('/edit/{id}', [ObatController::class, 'edit'])->name('doktor.obat.edit');
+            Route::post('/update/{id}', [ObatController::class, 'update'])->name('doktor.obat.update');
+            Route::get('/delete/{id}', [ObatController::class, 'destroy'])->name('doktor.obat.destroy');
         });
     });
 
-    Route::group(['middleware' => 'role:admin'], function () {
+    Route::group(['middleware' => 'role:doctor'], function () {
         // Routes accessible only by users with the 'admin' role
     });
 });
