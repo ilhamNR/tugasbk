@@ -28,7 +28,7 @@ class UserDoctorPivot extends Model
      */
     public function poli()
     {
-        return $this->belongsTo('App\Models\Poli');
+        return $this->hasOne('App\Models\Poli');
     }
 
     /**

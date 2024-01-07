@@ -45,30 +45,30 @@
             </a>
           </li>
           <li class="nav-header">ADMIN</li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="pages/calendar.html" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Poli
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="{{ route('doktor.obat') }}" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Obat
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="pages/kanban.html" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 Pasien
               </p>
             </a>
-          </li>
+          </li> --}}
           {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
@@ -100,14 +100,14 @@
           </li> --}}
           <li class="nav-header">DOKTER</li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="{{ route('doktor.periksa') }}" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Daftar Pasien
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="pages/gallery.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
@@ -122,7 +122,7 @@
                 Pasien
               </p>
             </a>
-          </li>
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

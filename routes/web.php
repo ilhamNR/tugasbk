@@ -29,12 +29,12 @@ Route::middleware([
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
-
+    Route::get('/dashboard', [PeriksaController::class, 'index'])->name('dashboard');
     Route::group(['middleware' => 'role:admin'], function () {
-        Route::get('/dashboard', [PeriksaController::class, 'index'])->name('doktor.periksa');
-        Route::group(['prefix' => '/obat'],function(){
+
+        Route::group(['prefix' => '/obat'], function () {
             Route::get('/', [ObatController::class, 'index'])->name('doktor.obat');
-            Route::post('/create',[ObatController::class, 'create'])->name('doktor.obat.create');
+            Route::post('/create', [ObatController::class, 'create'])->name('doktor.obat.create');
             Route::get('/edit/{id}', [ObatController::class, 'edit'])->name('doktor.obat.edit');
             Route::post('/update/{id}', [ObatController::class, 'update'])->name('doktor.obat.update');
             Route::get('/delete/{id}', [ObatController::class, 'destroy'])->name('doktor.obat.destroy');
@@ -42,9 +42,7 @@ Route::middleware([
     });
 
     Route::group(['middleware' => 'role:doctor'], function () {
-        // Routes accessible only by users with the 'admin' role
+        Route::get('/periksa', [PeriksaController::class, 'index'])->name('doktor.periksa');
+        Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('doktor.riwayat-pasien');
     });
 });
-
-Route::get('/periksa', [PeriksaController::class, 'index'])->name('doktor.periksa');
-Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('doktor.riwayat-pasien');
