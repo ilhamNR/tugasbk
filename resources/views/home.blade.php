@@ -21,7 +21,7 @@
                         <h3 class="panel-title">Registrasi Pasien</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="" method="POST">
+                        <form action="{{route('patient.register')}}" method="POST">
                             {{ csrf_field() }}
 
                             <div class="form-group">

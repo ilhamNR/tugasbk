@@ -55,6 +55,6 @@ Route::middleware([
     Route::group(['middleware' => 'role:doctor'], function () {
         Route::get('/periksa', [PeriksaController::class, 'index'])->name('doktor.periksa');
         Route::post('/periksa/finish/{id}',[PatientController::class, 'finishCheckup'])->name('dokter.finishPeriksa');
-        Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('doktor.riwayat-pasien');
+        Route::get('/riwayat-pasien/{id}', [RiwayatPasienController::class, 'index'])->name('doktor.riwayat-pasien');
     });
 });
