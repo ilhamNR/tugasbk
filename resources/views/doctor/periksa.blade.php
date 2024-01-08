@@ -14,10 +14,9 @@
                         <div class="card-header">
                             <h3 class="card-title">Daftar Pasien</h3>
                         </div>
-                        {{ auth()->user() }}
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="obat-table" data-update={{ route('doktor.obat.update', '') }} data-edit={{ route('doktor.obat.edit','') }} data-route={{ route('doktor.obat') }}
+                            <table id="periksa-table" data-route={{ route('doktor.periksa') }}
                                 class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -40,6 +39,93 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    <!-- Modal -->
+    <div class="modal fade" id="periksa_pasien" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Periksa Pasien</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('dokter.finishPeriksa', '2')}}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="patient_name">Nama</label>
+                            <input type="name" class="form-control" id="patient_name" placeholder="Nama" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="complaints">Keluhan</label>
+                            <input type="name" class="form-control" id="complaints" placeholder="Complaints" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Obat</label>
+                            <select name="medicines[]" multiple class="form-control medicines">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Catatan</label>
+                            <input type="name" name="notes" class="form-control" id="complaints" placeholder="Complaints">
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
 
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="riwayat_pasien" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Riwayat Pasien </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add this script to your HTML file -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectElement = document.querySelector('.medicines'); // Change the selector accordingly
 
+        // Make an AJAX request to the specified URL
+        fetch('{!!route('patient.getMedicine')!!}')
+            .then(response => response.json())
+            .then(data => {
+                // Clear existing options in the select element
+                selectElement.innerHTML = '';
+
+                // Populate the select element with options from the API response
+                data.forEach(function (medicine) {
+                    var option = document.createElement('option');
+                    option.value = medicine.id; // Set the value of the option
+                    option.text = medicine.name; // Set the text content of the option
+                    selectElement.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
 @endsection
+
+@vite('resources/js/admin/pasien.js')

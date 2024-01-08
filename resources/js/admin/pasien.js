@@ -5,26 +5,26 @@ import "datatables.net-buttons-bs4";
 import "datatables.net-responsive-bs4";
 import Swal from "sweetalert2";
 
-var dt = $("#obat-table")
+const periksaTable = $("#periksa-table");
+const route = periksaTable.data("route");
+
+var dt = $("#periksa-table")
 .DataTable({
     processing: true,
     serverSide: true,
     ajax: route, // memanggil route yang menampilkan data json
     columns: [
         {
-            data: "name",
-            name: "name",
-            searchable: "true",
+            data: 'patient_name',
+            name: 'patient_name'
         },
         {
-            data: "unit",
-            name: "unit",
-            searchable: "false",
+            data: 'queue_number',
+            name: 'queue_number'
         },
         {
-            data: "price",
-            name: "price",
-            searchable: "false",
+            data: 'complaints',
+            name: 'complaints'
         },
         {
             data: "id",
@@ -38,14 +38,12 @@ var dt = $("#obat-table")
                             Aksi
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item edit-button"  data-bs-toggle="modal" data-bs-target="#update-obat" data-route="` +
-                    edit +
-                    "/" +
+                            <a class="dropdown-item edit-button"  data-bs-toggle="modal" data-bs-target="#periksa_pasien" data-route="` +
                     data +
-                    `">Edit</a>
-                            <a class="dropdown-item delete-button" data-id="` +
+                    `">Periksa</a>
+                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#riwayat_pasien" data-id="` +
                     data +
-                    `" href="#">Hapus</a>
+                    `" href="#">Riwayat</a>
                         </div>
                     </div>
                 `
@@ -60,5 +58,5 @@ var dt = $("#obat-table")
 })
 .buttons()
 .container()
-.appendTo("#obat-table_wrapper .col-md-6:eq(0)");
+.appendTo("#periksa-table_wrapper .col-md-6:eq(0)");
 // Event delegation for the "Hapus" button

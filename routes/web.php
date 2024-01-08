@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Doktor\PeriksaController;
 use App\Http\Controllers\Doktor\RiwayatPasienController;
 use App\Http\Controllers\Admin\ObatController;
-
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PatientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +19,16 @@ use App\Http\Controllers\Admin\ObatController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::group(['prefix' => 'patient'], function () {
+    Route::get('/login', [HomeController::class, 'login'])->name('patient.login');
+    Route::post('/register', [HomeController::class, 'register'])->name('patient.register');
+    Route::get('/home', [PatientController::class, 'index'])->name('patient.home');
+    Route::post('/schedule', [PatientController::class, 'getSchedule'])->name('doctor.schedule');
+    Route::post('/checkup',[PatientController::class, 'registerCheckup'])->name('patient.checkup');
+    Route::get('/medicine', [PatientController::class, 'getMedicine'])->name('patient.getMedicine');
 });
 
 Route::middleware([
@@ -29,7 +40,7 @@ Route::middleware([
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
-    Route::get('/dashboard', [PeriksaController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::group(['middleware' => 'role:admin'], function () {
 
         Route::group(['prefix' => '/obat'], function () {
@@ -43,6 +54,7 @@ Route::middleware([
 
     Route::group(['middleware' => 'role:doctor'], function () {
         Route::get('/periksa', [PeriksaController::class, 'index'])->name('doktor.periksa');
+        Route::post('/periksa/finish/{id}',[PatientController::class, 'finishCheckup'])->name('dokter.finishPeriksa');
         Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('doktor.riwayat-pasien');
     });
 });
