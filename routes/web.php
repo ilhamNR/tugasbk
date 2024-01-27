@@ -6,6 +6,7 @@ use App\Http\Controllers\Doktor\RiwayatPasienController;
 use App\Http\Controllers\Admin\ObatController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Doktor\JadwalPeriksaController;
 use App\Http\Controllers\PatientController;
 /*
 |--------------------------------------------------------------------------
@@ -56,5 +57,9 @@ Route::middleware([
         Route::get('/periksa', [PeriksaController::class, 'index'])->name('doktor.periksa');
         Route::post('/periksa/finish/{id}',[PatientController::class, 'finishCheckup'])->name('dokter.finishPeriksa');
         Route::get('/riwayat-pasien/{id}', [RiwayatPasienController::class, 'index'])->name('doktor.riwayat-pasien');
+        Route::get('/jadwal-periksa', [JadwalPeriksaController::class, 'index'])->name('doktor.jadwal-periksa');
+        Route::post('/jadwal-periksa', [JadwalPeriksaController::class, 'index'])->name('doktor.jadwal-periksa');
+        Route::post('/jadwal-periksa/update/{id}', [JadwalPeriksaController::class, 'update'])->name('doktor.update-jadwal-periksa');
+
     });
 });

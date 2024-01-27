@@ -107,6 +107,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('doktor.jadwal-periksa') }}" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Jadwal Periksa
+              </p>
+            </a>
+          </li>
           {{-- <li class="nav-item">
             <a href="pages/gallery.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>

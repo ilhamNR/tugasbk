@@ -20,7 +20,7 @@ class CheckupSchedule extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'day', 'start_time', 'end_time', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'day', 'start_time', 'end_time','is_active', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/css/adminlte.css',
                 'resources/js/app.js',
                 'resources/js/admin/obat.js',
+                'resources/js/doktor/jadwal-periksa.js',
             ],
             refresh: true,
         }),
